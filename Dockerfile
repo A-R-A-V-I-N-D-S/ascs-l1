@@ -2,7 +2,7 @@ FROM Openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY ..
+COPY . .
 
 RUN chmod +x ./mvnw
 
