@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ASCS L1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script> -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      th:href="@{/images/apple-touch-icon.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      th:href="@{/images/favicon-32x32.png}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      th:href="@{/images/favicon-16x16.png}"
+    />
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        /* These below lines are not working and image is not rendered, hence added it as thymeleaf in body tag */
+        background: url("../static/images/Minimalist-Background.jpg");
+        background-size: cover;
+      }
+      header,
+      footer {
+        position: fixed;
+        background-color: black;
+        color: white;
+        width: 100%;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        top: 0;
+      }
+      header h2 {
+        font-family: "Host Grotesk", sans-serif;
+        font-weight: 100;
+        font-size: 30px;
+      }
+      footer {
+        position: fixed;
+        bottom: 0;
+        text-align: left;
+        font-family: "Host Grotesk", sans-serif;
+        font-weight: 100;
+        font-size: 12px;
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      nav ul li {
+        list-style: none;
+        display: inline-block;
+      }
+      header nav ul li a {
+        text-decoration: none;
+        color: whitesmoke;
+        font-family: "Poppins", serif;
+        font-weight: 200;
+        font-size: 18px;
+        padding: 0px 15px;
+      }
+      footer nav ul li a {
+        text-decoration: none;
+        color: whitesmoke;
+        font-family: "Poppins", serif;
+        font-weight: 200;
+        font-size: 10px;
+        padding: 0px 15px;
+      }
+      .container {
+        /*background: green; */
+        width: 420px;
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        color: #fff;
+        border-radius: 10px;
+        padding: 30px 40px;
+        backdrop-filter: blur(8px);
+      }
+      .container h1 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 500;
+        font-size: 36px;
+        text-align: center;
+      }
+      .container .input-box {
+        position: relative;
+        font-family: "Poppins", sans-serif;
+        font-weight: 200;
+        width: 100%;
+        height: 50px;
+        margin: 30px 0px;
+      }
+      .container .toggle-button {
+        display: flex;
+        align-items: center;
+        position: relative;
+        font-family: "Poppins", sans-serif;
+        font-weight: 200;
+        width: 100%;
+        height: 50px;
+      }
+      .toggle-button label {
+        display: flex;
+        align-items: center;
+      }
+      .toggle-button #toggleCheckbox {
+        margin-left: 10px;
+        margin-right: 15px;
+      }
+      .toggle-button #daylightCheckbox {
+        margin-left: 10px;
+        margin-right: 15px;
+      }
+      .input-box input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: #fff;
+        padding: 20px 45px 20px 20px;
+        display: flex;
+        align-items: center;
+      }
+      input[type="file"] {
+        padding: 13px 45px 20px 20px;
+      }
+      .input-box select {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: #fff;
+        padding: 10px 45px 10px 15px;
+      }
+      .input-box option {
+        color: #000;
+      }
+      .input-box input::placeholder {
+        color: #fff;
+      }
+      .container .btn {
+        width: 100%;
+        height: 45px;
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        box-decoration-break: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 400;
+        color: #333;
+      }
+      .container ul {
+        list-style: none;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+      .container ul li {
+        flex-direction: column;
+        justify-content: space-evenly;
+      }
+      #custom-timings {
+        display: none;
+      }
+      .spinner-animation {
+        border-width: 2px;
+        border-color: #f00;
+      }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <header>
+    <div class="logo"><h2>ASCS L1 Website</h2></div>
+    <nav>
+      <ul>
+        <li><a href="#">Checklist</a></li>
+        <li><a href="#">Reports</a></li>
+      </ul>
+    </nav>
+  </header>
+  <footer>
+    <h3>&copy All Rights Reserved</h3>
+    <nav>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </footer>
+  <body
+    th:style="'background: url('+@{/images/Minimalist-Background.jpg}+' );background-size: cover;'"
+  >
+    <div class="container">
+      <form action="#" onsubmit="event.preventDefault(); submitForm();">
+        <h1>Checklist Details</h1>
+        <div class="input-box">
+          <label for="orderdate">Order Date</label>
+          <input type="date" id="orderdate" required />
+        </div>
+        <!-- <ul>
+          <li>
+            <label for="orderdate">Order Date</label>
+            <input type="date" name="orderdate" id="orderdate" />
+          </li>
+        </ul> -->
+        <div class="input-box">
+          <label for="shift">Shift</label>
+          <select name="shift" id="shift" required>
+            <option value="#">----SELECT----</option>
+            <option value="S1">S1</option>
+            <option value="S2">S2</option>
+            <option value="S3">S3</option>
+          </select>
+        </div>
+        <div class="toggle-button">
+          <label>
+            Custom Time
+            <input
+              type="checkbox"
+              name="customtime"
+              id="toggleCheckbox"
+              onclick="toggleFields()"
+            />
+          </label>
+          <label>
+            Daylight Savings On
+            <input
+              type="checkbox"
+              name="customtime"
+              id="daylightCheckbox"
+              onclick="toggleFields()"
+            />
+          </label>
+        </div>
+        <div id="custom-timings">
+          <div class="input-box">
+            <label for="starttime">Start Time</label>
+            <input type="datetime-local" id="starttime" />
+          </div>
+          <div class="input-box">
+            <label for="endtime">End Time</label>
+            <input type="datetime-local" id="endtime" />
+          </div>
+        </div>
+        <div class="input-box">
+          <label for="input-file">Upload File </label>
+          <input type="file" id="fileInput" required />
+        </div>
+        <button type="submit" class="btn" id="submit">
+          <span>Submit</span>
+        </button>
+      </form>
+    </div>
+    <script>
+      function toggleFields() {
+        const checkbox = document.getElementById("toggleCheckbox");
+        const fields = document.getElementById("custom-timings");
+        if (checkbox.checked) {
+          fields.style.display = "block";
+        } else {
+          fields.style.display = "none";
+        }
+      }
+      function isFormValid() {
+        if (
+          $("#toggleCheckbox").is(":checked") &&
+          !$("#starttime").val() &&
+          !$("#starttime").val()
+        ) {
+          alert("Start & End time must be filled!");
+          return false;
+        }
+        if ($("#toggleCheckbox").is(":checked") && !$("#starttime").val()) {
+          alert("Start time must be filled!");
+          return false;
+        }
+        if ($("#toggleCheckbox").is(":checked") && !$("#endtime").val()) {
+          alert("End time must be filled!");
+          return false;
+        }
+        return true;
+      }
+      function submitForm() {
+        if (!isFormValid()) {
+          return;
+        }
+        const formData = new FormData();
+
+        formData.append("orderDate", $("#orderdate").val());
+        formData.append("shift", $("#shift").val());
+        if ($("#daylightCheckbox").is(":checked")) {
+          formData.append("daylightSavings", true);
+        } else {
+          formData.append("daylightSavings", false);
+        }
+        if ($("#toggleCheckbox").is(":checked")) {
+          formData.append("shiftStartTime", $("#starttime").val());
+          formData.append("shiftEndTime", $("#endtime").val());
+        } else {
+          formData.append("shiftStartTime", null);
+          formData.append("shiftEndTime", null);
+        }
+        const file = $("#fileInput")[0].files[0];
+        if (file) {
+          formData.append("inputFile", file);
+        }
+        $.ajax({
+          type: "POST",
+          url: "/process-data",
+          data: formData,
+          contentType: false,
+          processData: false,
+          beforeSend: function () {
+            $("#submit").prop("disabled", true);
+            $("spinner-animation").show();
+          },
+          success: function (response) {
+            alert("Success: " + response.mesage);
+          },
+          error: function (xhr, status, error) {
+            alert("Error: " + error);
+          },
+        });
+      }
+    </script>
+  </body>
+</html>
