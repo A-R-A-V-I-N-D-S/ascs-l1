@@ -1,4 +1,4 @@
-package com.manualtasks.jobchecklist.models;
+package com.manualtasks.jobchecklist.model;
 
 public class UserData {
 

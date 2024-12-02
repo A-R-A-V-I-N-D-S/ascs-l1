@@ -283,7 +283,7 @@
         </div>
         <div class="input-box">
           <label for="input-file">Upload File </label>
-          <input type="file" id="fileInput" required />
+          <input type="file" id="fileInput" accept=".xlsx" required />
         </div>
         <button type="submit" class="btn" id="submit">
           <span>Submit</span>
@@ -320,6 +320,7 @@
         return true;
       }
       function submitForm() {
+        // e.preventDefault();
         if (!isFormValid()) {
           return;
         }
@@ -349,15 +350,22 @@
           data: formData,
           contentType: false,
           processData: false,
-          beforeSend: function () {
-            $("#submit").prop("disabled", true);
-            $("spinner-animation").show();
+          xhrFields: {
+            responseType: "blob",
           },
-          success: function (response) {
-            alert("Success: " + response.mesage);
+          success: function (data, textStatus, xhr) {
+            // alert("Success: " + response.mesage);
+            let blobData = new Blob([data], {
+              type: xhr.getResponseHeader("Content-Type"),
+            });
+            let link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blobData);
+            link.download = "sample.xlsx";
+            link.click();
           },
-          error: function (xhr, status, error) {
-            alert("Error: " + error);
+          error: function (xhr, textStatus, error) {
+            console.log(xhr.getResponseHeader("Content-Type"));
+            alert(error);
           },
         });
       }

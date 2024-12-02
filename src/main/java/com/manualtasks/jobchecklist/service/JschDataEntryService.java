@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 import com.jcraft.jsch.ChannelSftp;
 import com.manualtasks.jobchecklist.config.ApplicationConfig;
-import com.manualtasks.jobchecklist.models.UserInputData;
+import com.manualtasks.jobchecklist.model.UserInputData;
 
 @Service
 public class JschDataEntryService {
